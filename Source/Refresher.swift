@@ -19,6 +19,9 @@ import UIKit
     /// - parameter state: Current refreesh state.
     /// - parameter percent: Percent of reached refresh threshold.
     func updateRefreshView(refreshView: UIView, state: RefreshState, percent: Float)
+
+    /// Notify refresh timing.
+    func startRefreshing()
 }
 
 class Refresher: NSObject {
@@ -26,9 +29,13 @@ class Refresher: NSObject {
     let scrollView: UIScrollView
     weak var delegate: RefresherDelegate?
     var state: RefreshState = .Normal {
-        didSet {
+        didSet (oldValue) {
             let percent = Float(-scrollView.contentOffset.y / refreshView.frame.height)
             delegate?.updateRefreshView(refreshView, state: state, percent: percent)
+
+            if oldValue != .Refreshing && state == .Refreshing {
+                delegate?.startRefreshing()
+            }
         }
     }
     var animateDuration: NSTimeInterval = 0.3

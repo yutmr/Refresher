@@ -56,11 +56,14 @@ extension ViewController: RefresherDelegate {
             refreshView.backgroundColor = UIColor.blueColor()
         case .Refreshing:
             refreshView.backgroundColor = UIColor.yellowColor()
-            let delay = 3.0 * Double(NSEC_PER_SEC)
-            let time  = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            dispatch_after(time, dispatch_get_main_queue()) { [weak self] in
-                self?.refresher?.finishRefreshing()
-            }
+        }
+    }
+
+    func startRefreshing() {
+        let delay = 3.0 * Double(NSEC_PER_SEC)
+        let time  = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue()) { [weak self] in
+            self?.refresher?.finishRefreshing()
         }
     }
 }
