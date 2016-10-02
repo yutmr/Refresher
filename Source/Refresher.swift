@@ -8,9 +8,9 @@
 import UIKit
 
 @objc enum RefreshState: Int {
-    case Normal
-    case Refreshing
-    case Ready
+    case normal
+    case refreshing
+    case ready
 }
 
 @objc protocol RefresherDelegate: UIScrollViewDelegate {
@@ -18,7 +18,7 @@ import UIKit
     /// - parameter refreshView: A view for display refresh state.
     /// - parameter state: Current refreesh state.
     /// - parameter percent: Percent of reached refresh threshold.
-    func updateRefreshView(refreshView: UIView, state: RefreshState, percent: Float)
+    func updateRefreshView(_ refreshView: UIView, state: RefreshState, percent: Float)
 
     /// Notify refresh timing.
     func startRefreshing()
@@ -28,56 +28,56 @@ class Refresher: NSObject {
     let refreshView: UIView
     let scrollView: UIScrollView
     weak var delegate: RefresherDelegate?
-    var state: RefreshState = .Normal {
+    var state: RefreshState = .normal {
         didSet (oldValue) {
             let percent = Float(-scrollView.contentOffset.y / refreshView.frame.height)
             delegate?.updateRefreshView(refreshView, state: state, percent: percent)
 
-            if oldValue != .Refreshing && state == .Refreshing {
+            if oldValue != .refreshing && state == .refreshing {
                 delegate?.startRefreshing()
             }
         }
     }
-    var animateDuration: NSTimeInterval = 0.3
+    var animateDuration: TimeInterval = 0.3
 
     init(refreshView: UIView, scrollView: UIScrollView) {
-        refreshView.frame = CGRectMake(0, -refreshView.frame.height, scrollView.frame.width, refreshView.frame.height)
+        refreshView.frame = CGRect(x: 0, y: -refreshView.frame.height, width: scrollView.frame.width, height: refreshView.frame.height)
         scrollView.addSubview(refreshView)
         self.refreshView = refreshView
         self.scrollView = scrollView
     }
 
-    func didScroll(scrollView: UIScrollView) {
+    func didScroll(_ scrollView: UIScrollView) {
         let height = refreshView.frame.height
         let offsetY = scrollView.contentOffset.y
 
         switch state {
-        case .Normal:
+        case .normal:
             // Switch state if below threshold
-            state = (height < -offsetY) ? .Ready : .Normal
-        case .Ready:
+            state = (height < -offsetY) ? .ready : .normal
+        case .ready:
             // Switch state if above threshold
-            state = (height > -offsetY) ? .Normal : .Ready
-        case .Refreshing:
+            state = (height > -offsetY) ? .normal : .ready
+        case .refreshing:
             // Set contentInset to refreshView visible
-            UIView.animateWithDuration(0.3) {
+            UIView.animate(withDuration: 0.3, animations: {
                 scrollView.contentInset = UIEdgeInsetsMake(height, 0, 0, 0)
-            }
+            }) 
         }
     }
 
-    func didEndDragging(scrollView: UIScrollView) {
-        if state == .Ready {
+    func didEndDragging(_ scrollView: UIScrollView) {
+        if state == .ready {
             // Start Refreshing
-            state = .Refreshing
+            state = .refreshing
         }
     }
 
     func finishRefreshing() {
         // End Refreshing
-        state = .Normal
-        UIView.animateWithDuration(animateDuration) {
-            self.scrollView.contentInset = UIEdgeInsetsZero
-        }
+        state = .normal
+        UIView.animate(withDuration: animateDuration, animations: {
+            self.scrollView.contentInset = UIEdgeInsets.zero
+        }) 
     }
 }
