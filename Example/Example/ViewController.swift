@@ -12,31 +12,31 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let refreshView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 60))
+        let refreshView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
         refresher = Refresher(refreshView: refreshView, scrollView: tableView)
         refresher?.delegate = self
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        cell.textLabel?.text = NSNumber(integer: indexPath.row).stringValue
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = "\(indexPath.row)"
         return cell
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 100
     }
 
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        refresher?.didScroll(scrollView)
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        refresher?.didScroll(scrollView: scrollView)
     }
 
-    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        refresher?.didEndDragging(scrollView)
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        refresher?.didEndDragging(scrollView: scrollView)
     }
 }
 
@@ -53,16 +53,14 @@ extension ViewController: RefresherDelegate {
             }
             refreshView.backgroundColor = UIColor(red: red, green: 0, blue: 0, alpha: 1)
         case .Ready:
-            refreshView.backgroundColor = UIColor.blueColor()
+            refreshView.backgroundColor = UIColor.blue
         case .Refreshing:
-            refreshView.backgroundColor = UIColor.yellowColor()
+            refreshView.backgroundColor = UIColor.yellow
         }
     }
 
     func startRefreshing() {
-        let delay = 3.0 * Double(NSEC_PER_SEC)
-        let time  = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue()) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] _ in
             self?.refresher?.finishRefreshing()
         }
     }
