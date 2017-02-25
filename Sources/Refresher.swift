@@ -12,7 +12,7 @@ import UIKit
     case stable, refreshing, ready
 }
 
-@objc protocol RefresherDelegate: UIScrollViewDelegate {
+@objc public protocol RefresherDelegate {
     /// Notice current refresh state.
     /// - parameter refreshView: A view for display refresh state.
     /// - parameter state: Current refreesh state.
