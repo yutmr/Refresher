@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "Refresher"
-  s.version = "0.1.0"
+  s.version = "0.2.0"
   s.summary = "A refresh control library for Custom UI."
   s.homepage = "https://github.com/yutmr/Refresher"
   s.license = "MIT"
