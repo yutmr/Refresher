@@ -24,13 +24,13 @@ import UIKit
     func startRefreshing()
 }
 
-class Refresher: NSObject {
+final class Refresher: NSObject {
 
-    private var refreshView: UIView!
+    private let refreshView: UIView
 
-    private var scrollView: UIScrollView!
+    private let scrollView: UIScrollView
 
-    weak var delegate: RefresherDelegate?
+    public weak var delegate: RefresherDelegate?
 
     private(set) var state: RefreshState = .Normal {
         didSet (oldValue) {
@@ -43,17 +43,18 @@ class Refresher: NSObject {
         }
     }
 
-    var animateDuration: TimeInterval = 0.3
+    public var animateDuration: TimeInterval = 0.3
 
     private var isDragging = false
 
-    init(refreshView: UIView, scrollView: UIScrollView) {
-        super.init()
+    public init(refreshView: UIView, scrollView: UIScrollView) {
         refreshView.frame = CGRect(x: 0, y: -refreshView.frame.height, width: scrollView.frame.width, height: refreshView.frame.height)
         scrollView.addSubview(refreshView)
+
         self.refreshView = refreshView
         self.scrollView = scrollView
 
+        super.init()
         scrollView.addObserver(self, forKeyPath: "contentOffset", options: [.new], context: nil)
     }
 
@@ -97,7 +98,7 @@ class Refresher: NSObject {
         }
     }
 
-    func finishRefreshing() {
+    public func finishRefreshing() {
         // End Refreshing
         state = .Normal
         UIView.animate(withDuration: animateDuration) {
