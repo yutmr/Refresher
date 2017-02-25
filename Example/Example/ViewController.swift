@@ -15,6 +15,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         let refreshView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
         refresher = Refresher(refreshView: refreshView, scrollView: tableView)
+        refresher?.animateDuration = 1
         refresher?.delegate = self
     }
 

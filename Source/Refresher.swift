@@ -84,7 +84,7 @@ final class Refresher: NSObject {
             state = (height > -offsetY) ? .Normal : .Ready
         case .Refreshing:
             // Set contentInset to refreshView visible
-            UIView.animate(withDuration: 0.3) { [weak self] _ in
+            UIView.animate(withDuration: animateDuration) { [weak self] _ in
                 self?.scrollView
                     .contentInset = UIEdgeInsetsMake(height, 0, 0, 0)
             }
