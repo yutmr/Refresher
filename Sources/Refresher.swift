@@ -23,7 +23,7 @@ import UIKit
     func startRefreshing()
 }
 
-final class Refresher: NSObject {
+final public class Refresher: NSObject {
 
     private let refreshView: UIView
 
