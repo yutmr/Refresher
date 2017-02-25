@@ -8,6 +8,7 @@
 import UIKit
 
 class ViewController: UITableViewController {
+
     var refresher: Refresher?
 
     override func viewDidLoad() {
@@ -30,18 +31,11 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 100
     }
-
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        refresher?.didScroll(scrollView: scrollView)
-    }
-
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        refresher?.didEndDragging(scrollView: scrollView)
-    }
 }
 
 // MARK: RefresherDelegate
 extension ViewController: RefresherDelegate {
+
     func updateRefreshView(refreshView: UIView, state: RefreshState, percent: Float) {
         switch state {
         case .Normal:

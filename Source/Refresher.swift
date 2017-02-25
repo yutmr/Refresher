@@ -25,10 +25,14 @@ import UIKit
 }
 
 class Refresher: NSObject {
-    let refreshView: UIView
-    let scrollView: UIScrollView
+
+    private var refreshView: UIView!
+
+    private var scrollView: UIScrollView!
+
     weak var delegate: RefresherDelegate?
-    var state: RefreshState = .Normal {
+
+    private(set) var state: RefreshState = .Normal {
         didSet (oldValue) {
             let percent = Float(-scrollView.contentOffset.y / refreshView.frame.height)
             delegate?.updateRefreshView(refreshView: refreshView, state: state, percent: percent)
@@ -38,16 +42,35 @@ class Refresher: NSObject {
             }
         }
     }
+
     var animateDuration: TimeInterval = 0.3
 
+    private var isDragging = false
+
     init(refreshView: UIView, scrollView: UIScrollView) {
+        super.init()
         refreshView.frame = CGRect(x: 0, y: -refreshView.frame.height, width: scrollView.frame.width, height: refreshView.frame.height)
         scrollView.addSubview(refreshView)
         self.refreshView = refreshView
         self.scrollView = scrollView
+
+        scrollView.addObserver(self, forKeyPath: "contentOffset", options: [.new], context: nil)
     }
 
-    func didScroll(scrollView: UIScrollView) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard  let scrollView = object as? UIScrollView else {
+            return
+        }
+
+        if isDragging && !scrollView.isDragging {
+            didEndDragging()
+        }
+        isDragging = scrollView.isDragging
+
+        didScroll()
+    }
+
+    private func didScroll() {
         let height = refreshView.frame.height
         let offsetY = scrollView.contentOffset.y
 
@@ -60,13 +83,14 @@ class Refresher: NSObject {
             state = (height > -offsetY) ? .Normal : .Ready
         case .Refreshing:
             // Set contentInset to refreshView visible
-            UIView.animate(withDuration: 0.3) {
-                scrollView.contentInset = UIEdgeInsetsMake(height, 0, 0, 0)
+            UIView.animate(withDuration: 0.3) { [weak self] _ in
+                self?.scrollView
+                    .contentInset = UIEdgeInsetsMake(height, 0, 0, 0)
             }
         }
     }
 
-    func didEndDragging(scrollView: UIScrollView) {
+    private func didEndDragging() {
         if state == .Ready {
             // Start Refreshing
             state = .Refreshing
