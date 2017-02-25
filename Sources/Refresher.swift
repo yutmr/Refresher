@@ -31,7 +31,7 @@ final public class Refresher: NSObject {
 
     public weak var delegate: RefresherDelegate?
 
-    private(set) var state: RefreshState = .stable {
+    public private(set) var state: RefreshState = .stable {
         didSet (oldValue) {
             let percent = Float(-scrollView.contentOffset.y / refreshView.frame.height)
             delegate?.updateRefreshView(refreshView: refreshView, state: state, percent: percent)
@@ -57,7 +57,7 @@ final public class Refresher: NSObject {
         scrollView.addObserver(self, forKeyPath: "contentOffset", options: [.new], context: nil)
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard  let scrollView = object as? UIScrollView else {
             return
         }
