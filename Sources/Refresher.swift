@@ -7,10 +7,9 @@
 
 import UIKit
 
-@objc enum RefreshState: Int {
-    case Normal
-    case Refreshing
-    case Ready
+@objc public enum RefreshState: Int {
+
+    case stable, refreshing, ready
 }
 
 @objc protocol RefresherDelegate: UIScrollViewDelegate {
@@ -32,12 +31,12 @@ final class Refresher: NSObject {
 
     public weak var delegate: RefresherDelegate?
 
-    private(set) var state: RefreshState = .Normal {
+    private(set) var state: RefreshState = .stable {
         didSet (oldValue) {
             let percent = Float(-scrollView.contentOffset.y / refreshView.frame.height)
             delegate?.updateRefreshView(refreshView: refreshView, state: state, percent: percent)
 
-            if oldValue != .Refreshing && state == .Refreshing {
+            if oldValue != .refreshing && state == .refreshing {
                 delegate?.startRefreshing()
             }
         }
@@ -76,13 +75,13 @@ final class Refresher: NSObject {
         let offsetY = scrollView.contentOffset.y
 
         switch state {
-        case .Normal:
+        case .stable:
             // Switch state if below threshold
-            state = (height < -offsetY) ? .Ready : .Normal
-        case .Ready:
+            state = (height < -offsetY) ? .ready : .stable
+        case .ready:
             // Switch state if above threshold
-            state = (height > -offsetY) ? .Normal : .Ready
-        case .Refreshing:
+            state = (height > -offsetY) ? .stable : .ready
+        case .refreshing:
             // Set contentInset to refreshView visible
             UIView.animate(withDuration: animateDuration) { [weak self] _ in
                 self?.scrollView
@@ -92,15 +91,15 @@ final class Refresher: NSObject {
     }
 
     private func didEndDragging() {
-        if state == .Ready {
+        if state == .ready {
             // Start Refreshing
-            state = .Refreshing
+            state = .refreshing
         }
     }
 
     public func finishRefreshing() {
         // End Refreshing
-        state = .Normal
+        state = .stable
         UIView.animate(withDuration: animateDuration) {
             self.scrollView.contentInset = .zero
         }

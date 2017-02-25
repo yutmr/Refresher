@@ -39,7 +39,7 @@ extension ViewController: RefresherDelegate {
 
     func updateRefreshView(refreshView: UIView, state: RefreshState, percent: Float) {
         switch state {
-        case .Normal:
+        case .stable:
             var red = CGFloat(percent)
             if red > 1 {
                 red = 1
@@ -47,9 +47,9 @@ extension ViewController: RefresherDelegate {
                 red = 0
             }
             refreshView.backgroundColor = UIColor(red: red, green: 0, blue: 0, alpha: 1)
-        case .Ready:
+        case .ready:
             refreshView.backgroundColor = UIColor.blue
-        case .Refreshing:
+        case .refreshing:
             refreshView.backgroundColor = UIColor.yellow
         }
     }
