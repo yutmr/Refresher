@@ -55,7 +55,7 @@ extension ViewController: RefresherDelegate {
     }
 
     func startRefreshing() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] _ in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             self?.refresher?.finishRefreshing()
         }
     }
