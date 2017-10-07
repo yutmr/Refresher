@@ -58,6 +58,10 @@ final public class Refresher: NSObject {
         scrollView.addObserver(self, forKeyPath: "contentOffset", options: [.new], context: nil)
     }
 
+    deinit {
+        scrollView.removeObserver(self, forKeyPath: "contentOffset")
+    }
+
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard  let scrollView = object as? UIScrollView else {
             return
