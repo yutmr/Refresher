@@ -12,8 +12,22 @@
 		C123129A1D03BCCE00523B53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C12312981D03BCCE00523B53 /* Main.storyboard */; };
 		C15D2F2D1B5B35E3001E5F2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15D2F2C1B5B35E3001E5F2E /* AppDelegate.swift */; };
 		C15D2F321B5B35E3001E5F2E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C15D2F311B5B35E3001E5F2E /* Images.xcassets */; };
-		C15D2F4C1B5B3754001E5F2E /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15D2F4B1B5B3754001E5F2E /* Refresher.swift */; };
+		C1DF1C151F88E17600E51C85 /* ObjcViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1DF1C141F88E17600E51C85 /* ObjcViewController.m */; };
+		C1DF1C441F88F66B00E51C85 /* Refresher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DF1C451F88F66B00E51C85 /* Refresher.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C1DF1C271F88EA4800E51C85 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C12312951D03BC3100523B53 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Example/ViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -23,7 +37,10 @@
 		C15D2F291B5B35E3001E5F2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Example/Info.plist; sourceTree = SOURCE_ROOT; };
 		C15D2F2C1B5B35E3001E5F2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Example/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		C15D2F311B5B35E3001E5F2E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Example/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		C15D2F4B1B5B3754001E5F2E /* Refresher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Refresher.swift; path = ../Sources/Refresher.swift; sourceTree = "<group>"; };
+		C1DF1C121F88E17600E51C85 /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Example-Bridging-Header.h"; path = "Example/Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		C1DF1C131F88E17600E51C85 /* ObjcViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ObjcViewController.h; path = Example/Images.xcassets/ObjcViewController.h; sourceTree = "<group>"; };
+		C1DF1C141F88E17600E51C85 /* ObjcViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ObjcViewController.m; path = Example/Images.xcassets/ObjcViewController.m; sourceTree = "<group>"; };
+		C1DF1C451F88F66B00E51C85 /* Refresher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Refresher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1DF1C441F88F66B00E51C85 /* Refresher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				C15D2F271B5B35E3001E5F2E /* Example */,
-				C15D2F4A1B5B362A001E5F2E /* Refresher */,
 				C15D2F261B5B35E3001E5F2E /* Products */,
+				C1DF1C431F88F66B00E51C85 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,22 +75,25 @@
 		C15D2F271B5B35E3001E5F2E /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				C15D2F2C1B5B35E3001E5F2E /* AppDelegate.swift */,
-				C12312951D03BC3100523B53 /* ViewController.swift */,
+				C1DF1C121F88E17600E51C85 /* Example-Bridging-Header.h */,
+				C1DF1C131F88E17600E51C85 /* ObjcViewController.h */,
+				C1DF1C141F88E17600E51C85 /* ObjcViewController.m */,
 				C15D2F291B5B35E3001E5F2E /* Info.plist */,
 				C12312981D03BCCE00523B53 /* Main.storyboard */,
-				C12312971D03BCCE00523B53 /* LaunchScreen.xib */,
+				C15D2F2C1B5B35E3001E5F2E /* AppDelegate.swift */,
+				C12312951D03BC3100523B53 /* ViewController.swift */,
 				C15D2F311B5B35E3001E5F2E /* Images.xcassets */,
+				C12312971D03BCCE00523B53 /* LaunchScreen.xib */,
 			);
 			name = Example;
 			sourceTree = "<group>";
 		};
-		C15D2F4A1B5B362A001E5F2E /* Refresher */ = {
+		C1DF1C431F88F66B00E51C85 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C15D2F4B1B5B3754001E5F2E /* Refresher.swift */,
+				C1DF1C451F88F66B00E51C85 /* Refresher.framework */,
 			);
-			name = Refresher;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +106,7 @@
 				C15D2F211B5B35E3001E5F2E /* Sources */,
 				C15D2F221B5B35E3001E5F2E /* Frameworks */,
 				C15D2F231B5B35E3001E5F2E /* Resources */,
+				C1DF1C271F88EA4800E51C85 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -109,6 +131,7 @@
 					C15D2F241B5B35E3001E5F2E = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 39D5MZDTSP;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -149,9 +172,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1DF1C151F88E17600E51C85 /* ObjcViewController.m in Sources */,
 				C12312961D03BC3100523B53 /* ViewController.swift in Sources */,
 				C15D2F2D1B5B35E3001E5F2E /* AppDelegate.swift in Sources */,
-				C15D2F4C1B5B3754001E5F2E /* Refresher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +289,9 @@
 		C15D2F451B5B35E4001E5F2E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 39D5MZDTSP;
@@ -274,13 +299,18 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yutmr.Refresher-Example";
 				PRODUCT_NAME = Example;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Example/Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
 		C15D2F461B5B35E4001E5F2E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 39D5MZDTSP;
@@ -288,6 +318,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yutmr.Refresher-Example";
 				PRODUCT_NAME = Example;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Example/Example-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

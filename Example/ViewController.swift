@@ -5,7 +5,7 @@
 //  Copyright © 2016 Yu Tamura. All rights reserved.
 //
 
-import UIKit
+import Refresher
 
 class ViewController: UITableViewController {
 
