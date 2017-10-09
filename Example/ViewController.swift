@@ -5,7 +5,7 @@
 //  Copyright © 2016 Yu Tamura. All rights reserved.
 //
 
-import UIKit
+import Refresher
 
 class ViewController: UITableViewController {
 
@@ -55,7 +55,7 @@ extension ViewController: RefresherDelegate {
     }
 
     func startRefreshing() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] _ in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             self?.refresher?.finishRefreshing()
         }
     }
